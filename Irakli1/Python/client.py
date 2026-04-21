@@ -1,0 +1,46 @@
+import requests
+from model import Spieler
+from pydantic import ValidationError
+
+SERVER_URL = 'http://localhost:12345/spieler'
+
+def spieler_eingeben_und_senden():
+    name = input("Name: ")
+    alter = input("Alter: ")
+    position = input("Position (Torwart, Innenverteidiger, Außenverteidiger, Zentrales Mittelfeld, Flügelspieler, Stürmer): ")
+    tore = input("Tore: ")
+    verein = input("Verein: ")
+
+    try:
+        spieler = Spieler(
+            name=name,
+            alter=int(alter),
+            position=position,
+            tore=int(tore),
+            verein=verein,
+        )
+    except ValidationError as e:
+        print("Fehler bei der Eingabe:", e)
+        return
+
+    json_data = spieler.model_dump(exclude_unset=False)
+    print("Zu sendendes JSON:", json_data)  # Debug
+
+    response = requests.post(SERVER_URL, json=json_data)
+
+    if response.status_code == 201:
+        print("Spieler erfolgreich an den Server gesendet:")
+        print(response.json())
+    else:
+        print("Fehler bei der Serverantwort:")
+        print(response.json())
+
+if __name__ == '__main__':
+    spieler_eingeben_und_senden()
+
+
+
+
+
+
+

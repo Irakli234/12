@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Spieler erfassen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Neuen Spieler erfassen</h1>
+
+    <form id="spielerForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="alter">Alter:</label>
+        <input type="number" id="alter" name="alter" min="10" max="99" required><br><br>
+
+        <label for="verein">Verein:</label>
+        <input type="text" id="verein" name="verein" required><br><br>
+        
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position" required><br><br>
+
+        <button type="submit">Absenden</button>
+    </form>
+
+    <h3>Antwort des Servers:</h3>
+    <pre id="serverAntwort"></pre>
+
+    <h3>Alle Spieler:</h3>
+    <ul id="spielerListe"></ul>
+
+    <script src="client.js"></script>
+</body>
+</html>
